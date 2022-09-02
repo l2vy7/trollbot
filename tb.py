@@ -3,6 +3,7 @@ import wmi
 import win32api, win32con
 import rotatescreen
 import pyautogui
+import os
 import asyncio
 
 c = wmi.WMI(namespace='wmi')
@@ -48,6 +49,9 @@ class GodBot(discord.Client):
                             try:
                                 if len(args) == 4:
                                     if args[3].isdigit():
+                                        if int(args[3]) < 0:
+                                            await message.channel.send("Nice try! Sadly, win32api is smarter than that. Better luck next time!")
+                                            return
                                         clamped = clamp(int(args[3]), 0, 100)
                                         methods.WmiSetBrightness(clamped, 0)
                                         await message.channel.send("Set the main screen brightness to " + str(clamped) + ".")
@@ -86,6 +90,9 @@ class GodBot(discord.Client):
                         elif len(args) == 3:
                             try:
                                 if args[2].isdigit():
+                                    if int(args[2]) < 0:
+                                            await message.channel.send("Nice try! Sadly, win32api is smarter than that. Better luck next time!")
+                                            return
                                     clamped = clamp(int(args[2]), 0, win32api.GetSystemMetrics(0))
                                     pos = win32api.GetCursorPos()
                                     win32api.SetCursorPos((clamped, pos[1]))
@@ -102,6 +109,9 @@ class GodBot(discord.Client):
                         elif len(args) == 3:
                             try:
                                 if args[2].isdigit():
+                                    if int(args[2]) < 0:
+                                            await message.channel.send("Nice try! Sadly, win32api is smarter than that. Better luck next time!")
+                                            return
                                     clamped = clamp(int(args[2]), 0, win32api.GetSystemMetrics(1))
                                     pos = win32api.GetCursorPos()
                                     win32api.SetCursorPos((pos[0], int(args[2])))
@@ -153,6 +163,10 @@ class GodBot(discord.Client):
                 if (len(args) >= 2):
                     await client.change_presence(activity=discord.Game(name=(' '.join(args[1:]))))
                     await message.channel.send("Okay! Changed my bot status to " + (' '.join(args[1:])))
+            elif args[0] == "restart":
+                os.system('shutdown -r -t 0')
+            elif args[0] == "shutdown":
+                os.system('shutdown -s -t 0')
             else:
                 await message.channel.send("Invalid command.")
                         
