@@ -5,3 +5,10 @@ cd trollbot
 py -m pip install -r requirements.txt
 py tb.py
 ```
+
+# on discord
+```
+controll!help
+```
+
+in any channel.
