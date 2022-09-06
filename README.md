@@ -12,3 +12,7 @@ controll!help
 ```
 
 in any channel.
+
+yes this is a userbot im sorry i had no other option if i wanted actual people to control my computer.
+
+this does not raid anyone if you do not count people spamming ```controll!keyboard message sex``` all the time
